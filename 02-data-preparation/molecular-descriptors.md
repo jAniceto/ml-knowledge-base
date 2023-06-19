@@ -225,7 +225,14 @@ mordred.shape
 ```
 
 
+## Further reading
+
+- [Computing Molecular Descriptors](https://drzinph.com/computing-molecular-descriptors-intro/)
+
+
 ## References
+
+- Mauri, A., Consonni, V., Todeschini, R. (2017). Molecular Descriptors. In: Leszczynski, J., Kaczmarek-Kedziera, A., Puzyn, T., G. Papadopoulos, M., Reis, H., K. Shukla, M. (eds) Handbook of Computational Chemistry. Springer, Cham. https://doi.org/10.1007/978-3-319-27282-5_51
 
 - [RDKit Cookbook, RDKit Documentation](https://www.rdkit.org/docs/Cookbook.html)
 
@@ -234,5 +241,3 @@ mordred.shape
 - [RDKit Cheatsheet](https://xinhaoli74.github.io/posts/2020/04/RDKit-Cheatsheet/)
 
 - [Hierarchical-QSAR-Modeling Notebook](https://github.com/XinhaoLi74/Hierarchical-QSAR-Modeling/blob/master/notebooks/descriptors.ipynb)
-
-- Mauri, A., Consonni, V., Todeschini, R. (2017). Molecular Descriptors. In: Leszczynski, J., Kaczmarek-Kedziera, A., Puzyn, T., G. Papadopoulos, M., Reis, H., K. Shukla, M. (eds) Handbook of Computational Chemistry. Springer, Cham. https://doi.org/10.1007/978-3-319-27282-5_51

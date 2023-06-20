@@ -27,6 +27,8 @@ A Knowledge Base on Machine Learning and Statistics.
 
 03-ml-models/linear-models.md
 03-ml-models/ml-models.md
+03-ml-models/gradient-boosting.md
+03-ml-models/hyperparameters-gbm.md
 ```
 
 ```{toctree}

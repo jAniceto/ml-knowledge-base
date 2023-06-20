@@ -1,4 +1,4 @@
-# ml-knowledge-base
+# Machine Learning Knowledge Base
 
-Knowledge Base on Machine Learning and Statistics.
+A Knowledge Base on Machine Learning and Statistics.
 

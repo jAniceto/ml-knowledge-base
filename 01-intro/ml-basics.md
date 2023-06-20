@@ -97,7 +97,7 @@ Bias-variance Trade-off:
 - The best model is where the error is reduced.
 - Compromise between bias and variance
 
-![bias-variance](../images/bias-variance.png)
+![bias-variance](../_static/bias-variance.png)
 
 
 ## Overfitting and underfitting

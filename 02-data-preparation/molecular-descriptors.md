@@ -119,50 +119,6 @@ df['n_Atoms'] = df['ROMol'].map(lambda x: x.GetNumAtoms())
 RDKit has a variety of built-in functionality for generating molecular fingerprints/descriptors.
 
 
-#### Morgan Fingerprint (ECFPx)
-
-To compute Morgan Fingerprint (ECFPx) use `AllChem.GetMorganFingerprintAsBitVect`. ECFP6 fingerprint for each molecule has 1024 bits. In the following `df['ROMol']` is the column containning the molecule `rdchem.Mol` object.
-
-```python
-from rdkit.Chem import AllChem
-
-radius=3
-nBits=1024
-
-ECFP6 = [AllChem.GetMorganFingerprintAsBitVect(x,radius=radius, nBits=nBits) for x in df['ROMol']]
-
-ecfp6_lists = [list(l) for l in ECFP6]
-
-ecfp6_name = [f'ECFP_{i}' for i in range(nBits)]
-
-ecfp6_df = pd.DataFrame(ecfp6_lists, index=df.index, columns=ecfp6_name)
-
-ecfp6_df.shape
-# (8221, 1024)
-```
-
-The `radius` is usually set 2 for similarity search and 3 for machine learning. For the number of bits (`nBits`) the default is 2048. 1024 is also widely used.
-
-
-#### MACCS keys
-
-```python
-from rdkit.Chem import MACCSkeys
-
-maccs = [MACCSkeys.GenMACCSKeys(x) for x in df['ROMol']]
-
-maccs_lists = [list(l) for l in maccs]
-
-maccs_name = [f'MACCS_{i}' for i in range(167)]
-
-maccs_df = pd.DataFrame(maccs_lists, index=df.index, columns=maccs_name)
-
-maccs_df.shape
-# (8221, 167)
-```
-
-#### Other RDKit descriptors
-
 ```python
 from descriptastorus.descriptors.DescriptorGenerator import MakeGenerator
 #https://github.com/bp-kelley/descriptastorus

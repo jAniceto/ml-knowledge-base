@@ -5,10 +5,10 @@ name = "pypi"
 
 [packages]
 sphinx = "*"
-rst-to-myst = {extras = ["sphinx"], version = "*"}
 myst-parser = "*"
 sphinx-autobuild = "*"
-furo = "*"
+rst-to-myst = {extras = ["sphinx"], version = "*"}
+sphinx-book-theme = "*"
 
 [dev-packages]
 

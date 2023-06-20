@@ -9,6 +9,7 @@ myst-parser = "*"
 sphinx-autobuild = "*"
 rst-to-myst = {extras = ["sphinx"], version = "*"}
 sphinx-book-theme = "*"
+ghp-import = "*"
 
 [dev-packages]
 

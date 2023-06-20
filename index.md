@@ -1,12 +1,13 @@
-```{include} readme.md
-:relative-images:
-```
+# Machine Learning Knowledge Base
+
+A Knowledge Base on Machine Learning and Statistics.
 
 
 ```{toctree}
 :maxdepth: 2
 :caption: 'Introduction'
 
+01-intro/definitions
 01-intro/ml-basics
 01-intro/stats-basics
 ```

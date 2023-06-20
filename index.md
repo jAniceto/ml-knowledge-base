@@ -16,7 +16,10 @@ A Knowledge Base on Machine Learning and Statistics.
 :maxdepth: 2
 :caption: 'Data preparation'
 
+02-data-preparation/data-validation.md
 02-data-preparation/molecular-descriptors.md
+02-data-preparation/mol-descriptors-maccs.md
+02-data-preparation/mol-descriptors-morgan.md
 02-data-preparation/feature-selection.md
 02-data-preparation/scaling.md
 ```

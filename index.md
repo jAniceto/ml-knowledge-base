@@ -5,41 +5,12 @@ A Knowledge Base on Machine Learning and Statistics.
 
 ```{toctree}
 :maxdepth: 2
-:caption: 'Introduction'
+:caption: 'Contents'
 
-01-intro/definitions
-01-intro/ml-basics
-01-intro/stats-basics
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 'Data preparation'
-
-02-data-preparation/data-validation.md
-02-data-preparation/molecular-descriptors.md
-02-data-preparation/mol-descriptors-maccs.md
-02-data-preparation/mol-descriptors-morgan.md
-02-data-preparation/feature-selection.md
-02-data-preparation/scaling.md
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 'ML models'
-
-03-ml-models/linear-models.md
-03-ml-models/ml-models.md
-03-ml-models/gradient-boosting.md
-03-ml-models/hyperparameters-gbm.md
-```
-
-```{toctree}
-:maxdepth: 2
-:caption: 'Model evaluation'
-
-04-model-evaluation/model-evaluation.md
-04-model-evaluation/y-randomization.md
+01-intro/index
+02-data-preparation/index
+03-ml-models/index
+04-model-evaluation/index
 ```
 
 ```{toctree}

@@ -31,3 +31,24 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'readme.md']
 html_theme = 'sphinx_book_theme'
 html_static_path = ['_static']
 html_title = project
+
+html_theme_options = {
+    # "path_to_docs": "docs",
+    "repository_url": "https://github.com/jAniceto/ml-knowledge-base",
+    "repository_branch": "master",
+    "use_edit_page_button": True,
+    "use_source_button": True,
+    "use_issues_button": True,
+    # "use_repository_button": True,
+    "use_download_button": True,
+    "use_sidenotes": True,
+    # "show_toc_level": 2,
+    # "announcement": (
+    #     "⚠️The latest release refactored our HTML, "
+    #     "so double-check your custom CSS rules!⚠️"
+    # ),
+    # "logo": {
+    #     "image_dark": "_static/logo-wide-dark.svg",
+    #     # "text": html_title,  # Uncomment to try text with logo
+    # }
+}

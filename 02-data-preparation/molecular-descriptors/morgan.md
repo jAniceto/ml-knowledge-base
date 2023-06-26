@@ -6,7 +6,7 @@ Essentially, it will extract information on substructures containing circular at
 
 Note that each bit position in ECFP indicates the presence or absence of particular substructures as in MACCS and other molecular fingerprints. ECFP fingerprints are not predefined thus they are also known as implicit fingerprints. 
 
-![ECFP6](../_static/ecfp6.png)
+![ECFP6](../../_static/ecfp6.png)
 
 
 

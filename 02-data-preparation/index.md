@@ -4,9 +4,7 @@ This section includes topics related to feature engineering, feature selection, 
 
 ```{toctree}
 data-validation.md
-molecular-descriptors.md
-mol-descriptors-maccs.md
-mol-descriptors-morgan.md
+molecular-descriptors/index.md
 feature-selection.md
 scaling.md
 ```

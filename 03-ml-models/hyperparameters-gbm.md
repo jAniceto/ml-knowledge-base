@@ -137,3 +137,47 @@ Gradient Boosting models have three types of hyperparameters :
 -   It can have various values for classification and regression case.
     Generally the default values work fine. Other values should be
     chosen only if you understand their impact on the model.
+
+
+## Hyperparameters grid in `scikit-learn`
+
+Here is a sample hyperparameter grid for a `GradientBoostingRegressor` model in `scikit-learn`. The first value in each list corresponds to the default value.
+
+```python
+# Loss function to be optimized
+loss = ['squared_error', 'absolute_error', 'huber']
+
+# Learning rate
+learning_rate = [0.1, 0.05, 0.01, 0.5]
+
+# Number of trees used in the boosting process
+n_estimators = [100, 50, 200, 500, 1000]
+
+# The fraction of samples to be used for fitting the individual base learners
+subsample = [1.0, 0.8]
+
+# Maximum depth of each tree
+max_depth = [3, 2, 5, 10]
+
+# Minimum number of samples per leaf
+min_samples_leaf = [1, 2, 4, 8]
+
+# Minimum number of samples to split a node
+min_samples_split = [2, 4, 10, 20, 50]  
+
+# Maximum number of features to consider for making splits
+max_features = [None, 0.2, 0.3, 0.4, 'sqrt', 'log2']
+# max_features = ['auto', 8, 10, 12, 14, 16]
+
+# Define the grid of hyperparameters to search
+hyperparameter_grid = {
+    'loss': loss,
+    'learning_rate': learning_rate,
+    'subsample': subsample,
+    'n_estimators': n_estimators,
+    'max_depth': max_depth,
+    'min_samples_leaf': min_samples_leaf,
+    'min_samples_split': min_samples_split,
+    'max_features': max_features
+}
+```

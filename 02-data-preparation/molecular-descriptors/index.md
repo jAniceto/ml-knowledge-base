@@ -45,9 +45,9 @@ Software for molecular descriptors calculation:
 ## Contents
 
 ```{toctree}
-rdkit.md
-maccs.md
-morgan.md
-mordrer.md
-similarity-search.md
+rdkit
+maccs
+morgan
+mordred
+similarity-search
 ```

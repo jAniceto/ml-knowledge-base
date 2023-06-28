@@ -5,9 +5,7 @@ Fitting a function $f(.)$ to datapoints $y_i=f(x_i)$ under some error function. 
 ## Linear Regression
 Fits a line minimizing the sum of mean-squared error for each datapoint.
 
-$$
-min_{\beta} \sum_{i} (y_i - f_{\beta}^{linear})^2
-$$
+$$min_{\beta} \sum_{i} (y_i - f_{\beta}^{linear})^2$$
 
 $$f_{\beta}^{linear}(x_i) = \beta_0 + \beta_1 x_i$$
 

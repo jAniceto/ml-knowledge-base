@@ -7,6 +7,7 @@ Basic concepts and definitions on machine learning and statistics.
 definitions
 stats-basics
 boxplot
+outliers
 ml-basics
 ml-workflow
 ```

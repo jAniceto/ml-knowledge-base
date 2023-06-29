@@ -1,4 +1,4 @@
-# Machine Learning using Python Scikit-Learn
+# Scikit-Learn
 
 This document compiles some code snippets that cover the process of training a Machine Learning model using the [`scikit-learn`](https://scikit-learn.org) Python library.
 

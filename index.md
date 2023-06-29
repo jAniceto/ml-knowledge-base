@@ -18,7 +18,8 @@ A Knowledge Base on Machine Learning and Statistics.
 :maxdepth: 2
 :caption: 'Resources'
 
-06-resources/index
+06-resources/articles
+06-resources/python-packages
 ```
 
 

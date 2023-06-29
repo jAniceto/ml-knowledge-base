@@ -4,20 +4,21 @@ A Knowledge Base on Machine Learning and Statistics.
 
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 1
 :caption: 'Contents'
 
 01-intro/index
 02-data-preparation/index
 03-ml-models/index
 04-model-evaluation/index
+05-sklearn/index
 ```
 
 ```{toctree}
 :maxdepth: 2
 :caption: 'Resources'
 
-05-resources/index
+06-resources/index
 ```
 
 

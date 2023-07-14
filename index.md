@@ -15,7 +15,7 @@ A Knowledge Base on Machine Learning and Statistics.
 ```
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 1
 :caption: 'Resources'
 
 06-resources/articles

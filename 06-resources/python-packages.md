@@ -2,13 +2,9 @@
 
 ## Molecular descriptors packages
 
-Established packages for Python:
-
 - [RDKit](https://www.rdkit.org/docs/GettingStartedInPython.html#list-of-available-descriptors)
-- [mordred](https://github.com/mordred-descriptor/mordred)
 - [PaDEL-Descriptor](http://www.yapcwsoft.com/dd/padeldescriptor/)
 - [pychem](https://code.google.com/archive/p/pychem/downloads)
-
 
 Other useful links:
 
@@ -21,3 +17,17 @@ Other useful links:
 ## Validation and Standardization packages
 
 - [MolVS: Molecule Validation and Standardization](https://molvs.readthedocs.io/en/latest/)
+
+
+## Data and properties packages
+
+- [mendeleev](https://mendeleev.readthedocs.io/en/stable/) - A python package for accessing various properties of elements, ions and isotopes in the periodic table of elements. 
+
+- [Open Babel](https://pypi.org/project/openbabel/) - Python bindings for the [Open Babel](http://openbabel.org/wiki/Main_Page) chemistry toolbox.
+
+
+## Visualization
+
+- [PyMOL](https://pymol.org/2/) - A molecular visualization system
+
+

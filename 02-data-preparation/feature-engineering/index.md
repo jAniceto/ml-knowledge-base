@@ -1,4 +1,17 @@
-# Molecular descriptors
+# Feature engineering
+
+Features are independent variables that are used as inputs for the model. In chemistry or material science, they are also referred as descriptors. It can be any relevant characteristic of the molecule or material, such as:
+
+- measured experimental properties
+
+- tabulated properties
+
+- calculated properties obtained from numerous methods, such as, molecular dynamics and cheminformatics.
+
+In most numerical problem cases, finding the features with higher predictive is usually more important than the choice of algorithm.
+
+
+## Molecular descriptors
 
 A molecular descriptor is defined as the "final result of a logical and mathematical procedure, which transforms chemical information encoded within a symbolic representation of a molecule into a useful number or the result of some standardized experiment".
 

@@ -5,7 +5,7 @@ This section includes topics related to feature engineering, feature selection, 
 ```{toctree}
 dataset-quality
 data-validation
-molecular-descriptors/index
+feature-engineering/index
 feature-selection
 train-test-sets
 scaling

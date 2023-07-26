@@ -5,9 +5,6 @@ Basic concepts and definitions on machine learning and statistics.
 
 ```{toctree}
 definitions
-stats-basics
-boxplot
-outliers
-ml-basics
-ml-workflow
+stats-basics/index
+ml-basics/index
 ```

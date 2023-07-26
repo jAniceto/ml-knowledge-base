@@ -49,3 +49,11 @@ A density plot is a representation of the distribution of a numeric variable. It
 - https://people.richland.edu/james/lecture/m170/ch03-pos.html
 - https://www.itl.nist.gov/div898/handbook/prc/section1/prc16.htm
 - https://www.simplypsychology.org/boxplots.html
+
+
+## Contents
+
+```{toctree}
+boxplot
+outliers
+```

@@ -4,7 +4,7 @@ A Knowledge Base on Machine Learning and Statistics.
 
 
 ```{toctree}
-:maxdepth: 1
+:maxdepth: 2
 :caption: 'Contents'
 
 01-intro/index

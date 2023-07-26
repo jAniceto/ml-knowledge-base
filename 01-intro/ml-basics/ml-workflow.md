@@ -2,7 +2,7 @@
 
 The following represents a typical machine learning workflow.
 
-![ml-workflow](../_static/ml-workflow.png)
+![ml-workflow](../../_static/ml-workflow.png)
 
 
 ## 1) Data preparation
@@ -60,3 +60,8 @@ Test the models agains previously unsean data to assess its predictive performan
 ## 5) Application
 
 Deploy the model in an useful manner for the end user. This can mean the creation of an app that receives the user inputs and returns the target result.
+
+
+## References
+
+- [Multiscale Computational Approaches toward the Understanding of Materials](https://doi.org/10.1002/adts.202200628)

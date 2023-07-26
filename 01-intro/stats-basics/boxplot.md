@@ -2,7 +2,7 @@
 
 A box and whisker plot—also called a box plot—displays the five-number summary of a set of data. The five-number summary is the minimum, first quartile, median, third quartile, and maximum.
 
-![Boxplot](../_static/boxplot.png)
+![Boxplot](../../_static/boxplot.png)
 
 
 ## Definitions

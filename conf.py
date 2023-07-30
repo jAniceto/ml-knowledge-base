@@ -36,6 +36,7 @@ html_theme = 'sphinx_book_theme'
 html_static_path = ['_static']
 html_title = project
 html_logo = '_static/logo/logo-horiz-sm.png'
+html_favicon = '_static/logo/icon64.png'
 
 html_theme_options = {
     # "path_to_docs": "docs",

@@ -1,4 +1,4 @@
-# Machine Learning Knowledge Base
+![logo](_static/logo/logo-horiz.png)
 
 A Knowledge Base on Machine Learning and Statistics.
 

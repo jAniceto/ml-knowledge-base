@@ -113,3 +113,5 @@ train_rdkit2d_df.shape
 - [RDKit Cheatsheet](https://xinhaoli74.github.io/posts/2020/04/RDKit-Cheatsheet/)
 
 - [Hierarchical-QSAR-Modeling Notebook](https://github.com/XinhaoLi74/Hierarchical-QSAR-Modeling/blob/master/notebooks/descriptors.ipynb)
+
+- [Description of RDKit descriptors](https://www.rdkit.org/docs/cppapi/namespaceRDKit_1_1Descriptors.html#ad64dce3df583f318a2214e1546fc7d69)

@@ -56,4 +56,5 @@ A density plot is a representation of the distribution of a numeric variable. It
 ```{toctree}
 boxplot
 outliers
+parametric-tests
 ```

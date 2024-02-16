@@ -1,73 +1,23 @@
 # Machine Learning Basics
 
-## Types of ML systems
+## Features
 
-Several criteria may be used to group ML systems.
-
-Whether they are trained under human supervision:
-
-- Supervised
-- Unsupervised 
-- Semisupervised 
-- Reinforcement Learning
-
-Whether they learn incrementally:
-
-- Online
-- Batch
-
-Whether they work by comparing new data points to known data points, or instead detect patterns in the training data and build a predictive model, much like scientists do:
-
-- Instance-based
-- Model-based learning 
+In machine learning, features are also referred to as variables, predictors, attributes, inputs, or independent variables. All these terms refer to the input variables or attributes that are used to train a machine learning model and make predictions. They are the measurable characteristics or properties of the data that can be used to predict the output or target variable. The choice of features is a critical step in the machine learning process, as the quality and relevance of the features can greatly impact the accuracy and performance of the model.
 
 
-## Supervised/unsupervised
+## Target
 
-### Supervised learning
+The target variable is the variable that the model is trying to predict. It is also known as the dependent variable, response variable, outcome variable, output variable or label. This later term ("label") is often used in classification tasks, where the target variable is a categorical variable that is used to label or classify instances of data. The target variable is the variable that is affected by changes in the input variables, or features. 
 
-The training set you feed to the algorithm includes the desired solutions (labels). Example: classification.
-Regression algorithms can be used for classification as well, and vice-versa. For example, Logistic Regression is commonly used for classification, as it can output a value that corresponds to the probability of belonging to a given class.
+For example, in a model that predicts house prices, the target variable would be the house price, and the features would be various attributes of the house such as its size, number of bedrooms, location, etc. The model would take in these features as inputs and output a predicted house price.
 
-Examples: 
-- k-Nearest Neighbors
-- Linear Regression
-- Logistic Regression
-- Support Vector Machines (SVMs)
-- Decision Trees and Random Forests
-- Neural networks (can be other types too)
 
-### Unsupervised learning
+## Hyperparameters
 
-Training data is not labeled.
+Hyperparameters are parameters that are not learned directly from the training data, but must be set by the user before the learning process begins. These parameters define the characteristics of a machine learning model and affect its learning process.
 
-Examples: 
-- Clustering 
-	- K-Means
-	- DBSCAN
-	- Hierarchical Cluster Analysis (HCA)
-- Anomaly detection and novelty detection 
-	- One class SVM
-	- Isolation Forest
-- Visualization and dimensionality reduction
-	- Principal Component Analysis (PCA)
-	- Kernel PCA
-	- Locally-Linear Embedding (LLE)
-	- t-distributed Stochastic Neighbor Embedding (t-SNE)
-- Association rule learning
-	- Apriori
-	- Eclat
+Hyperparameters are usually set through trial and error, intuition, or by using techniques like grid search or random search. The optimal values of hyperparameters may vary depending on the specific problem, dataset, and model architecture. Finding the right hyperparameters often requires experimentation and fine-tuning to achieve the best performance.
 
-### Semisupervised learning
-
-Some data is labeled, other is not. Some algorithms can deal with this. They are usually combinations of supervised and unsupervised algorithms.
-
-Examples:
-- Deep belief networks (DBNs) - based on unsupervised components called restricted Boltzmann machines (RBMs) stacked on top of one another. RBMs are trained sequentially in an unsupervised manner, and then the whole system is fine-tuned using supervised learning techniques
-
-### Reinforcement learning
-
-Completely different. The system learn by itself the best policy to improve.
 
 
 ## Bias-Variance Tradeoff
@@ -108,5 +58,6 @@ Bias-variance Trade-off:
 ## Contents
 
 ```{toctree}
+types-ml
 ml-workflow
 ```

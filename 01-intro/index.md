@@ -1,10 +1,10 @@
 # Introduction
 
-Basic concepts and definitions on machine learning and statistics.
+Basic concepts and definitions on math, statistics, and machine learning.
 
 
 ```{toctree}
-definitions
+math-basics/index
 stats-basics/index
 ml-basics/index
 ```

@@ -7,4 +7,6 @@ model-evaluation
 metrics
 cross-validation
 y-randomization
+partial-dependance-plots
+shapley-additice-explanations
 ```

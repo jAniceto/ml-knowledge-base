@@ -2,6 +2,8 @@
 
 A Decision Tree is a supervised machine learning algorithm used for both classification and regression tasks. It is a tree-like  model where each internal node represents a decision based on a feature, each branch represents an outcome of that decision, and each leaf node represents a class label (in classification) or a predicted value (in regression).
 
+![Decision Tree diagram](../_static/decision-tree.png)
+
 
 ## Decision Trees for classification
 

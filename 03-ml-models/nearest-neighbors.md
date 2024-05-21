@@ -1,6 +1,8 @@
-# k-Nearest Neighborst
+# k-Nearest Neighbors
 
-k-Nearest Neighborst (kNN) is a supervised machine learning algorithm used for both classification and regression tasks. It is considered a "lazy learner" because it does not build a model during training. Instead, it memorizes the training data and uses it directly for predictions.
+k-Nearest Neighbors (kNN) is a supervised machine learning algorithm used for both classification and regression tasks. It is considered a "lazy learner" because it does not build a model during training. Instead, it memorizes the training data and uses it directly for predictions.
+
+![k-Nearest Neighbors diagram](../_static/k-nearest-neighbor.png)
 
 
 ## kNN for classification

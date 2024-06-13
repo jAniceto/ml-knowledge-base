@@ -1,0 +1,698 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feature selection &#8212; Machine Learning Knowledge Base</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02-data-preparation/feature-selection';</script>
+    <link rel="shortcut icon" href="../_static/icon64.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Train, validation, and test sets" href="train-test-sets.html" />
+    <link rel="prev" title="Measure molecular similarity" href="feature-engineering/similarity-search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo-horiz-sm.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo-horiz-sm.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01-intro/index.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01-intro/math-basics/index.html">Math Basics</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../01-intro/stats-basics/index.html">Statistics basics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../01-intro/stats-basics/boxplot.html">Boxplots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01-intro/stats-basics/outliers.html">Outliers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01-intro/stats-basics/parametric-tests.html">Parametric tests or models</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../01-intro/ml-basics/index.html">Machine Learning Basics</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../01-intro/ml-basics/types-ml.html">Types of ML systems</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01-intro/ml-basics/ml-workflow.html">Machine Learning workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Data preparation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dataset-quality.html">Quality of a dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-validation.html">Data validation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="feature-engineering/index.html">Feature engineering</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="feature-engineering/rdkit.html">RDKit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feature-engineering/maccs.html">MACCS fingerprints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feature-engineering/morgan.html">Morgan ECFP fingerprints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feature-engineering/mordred.html">Mordred</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feature-engineering/similarity-search.html">Measure molecular similarity</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Feature selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="train-test-sets.html">Train, validation, and test sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scaling.html">Scaling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03-ml-models/index.html">Machine Learning models</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../03-ml-models/linear-models/index.html">Linear models</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../03-ml-models/linear-models/linear-regression.html">Linear regression</a></li>
+
+
+
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../03-ml-models/ml-models.html">ML Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-ml-models/nearest-neighbors.html">k-Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-ml-models/decision-tree.html">Decision Tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-ml-models/gradient-boosting.html">Gradient Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-ml-models/hyperparameters-gbm.html">Hyperparameters - Gradient Boosting</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04-model-evaluation/index.html">Model evaluation</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/model-evaluation.html">Model evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/metrics.html">Performance metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/cross-validation.html">Train and cross validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/y-randomization.html">y-Randomization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/partial-dependance-plots.html">Partial dependance plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/shapley-additice-explanations.html">SHAP (SHapley Additive exPlanations)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05-sklearn/index.html">Scikit-Learn</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05-sklearn/pipelines.html">Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05-sklearn/saving-models.html">Saving Scikit-learn model for reuse</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06-resources/scientific-papers.html">Scientific articles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-resources/articles.html">Reading material</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-resources/python-packages.html">Python ML tools and packages</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jAniceto/ml-knowledge-base/blob/master/02-data-preparation/feature-selection.md?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jAniceto/ml-knowledge-base/edit/master/02-data-preparation/feature-selection.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jAniceto/ml-knowledge-base/issues/new?title=Issue%20on%20page%20%2F02-data-preparation/feature-selection.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/02-data-preparation/feature-selection.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Feature selection</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-methods">Filter methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-correlation-metric">Collinearity (correlation metric)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapper-methods">Wrapper methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-feature-elimination">Recursive feature elimination</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks">Drawbacks</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boruta">Boruta</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Drawbacks</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#embedded-methods">Embedded methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-by-model-importance">Selection by model importance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Advantages</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Drawbacks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-methods">Dimensionality reduction methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hybrid-methods">Hybrid methods</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="feature-selection">
+<h1>Feature selection<a class="headerlink" href="#feature-selection" title="Permalink to this heading">#</a></h1>
+<p>Consider the following case. The <a class="reference external" href="https://www.rdkit.org/">RDkit</a> software can generate descriptors based on the molecular structure of compounds. It generates descriptors from the simplified molecular-input line-entry system (SMILES, a method of describing the chemical structure by string).</p>
+<p>RDkit generates 200 descriptors. However, some of them are not effective (e.g., all values are the same for all compounds, the correlation coefficient with the target is almost zero, etc.). Therefore, some pretreatments can be conducted :</p>
+<ul class="simple">
+<li><p>exclude features of standard deviation for all data points = 0 (all data points have the same value in the descriptor).</p></li>
+<li><p>exclude features whose correlation coefficient is below a defined threshold (e.g., &lt; 0.1).</p></li>
+<li><p>select features using <a class="reference external" href="https://towardsdatascience.com/boruta-explained-the-way-i-wish-someone-explained-it-to-me-4489d70e154a">Boruta</a>. Boruta is a software that can select features. It iteratively removes the features that are proved by a statistical test to be less relevant than random probes.</p></li>
+</ul>
+<p>There are many different feature selection methods in machine learning, each with its own strengths and weaknesses. The most common types/groups feature selection methods are: filter methods, wrapper methods, embedded methods, dimensionality reduction methods, and hybrid methods.</p>
+<div class="section" id="filter-methods">
+<h2>Filter methods<a class="headerlink" href="#filter-methods" title="Permalink to this heading">#</a></h2>
+<p>Filter methods rank features based on statistical measures such as correlation or mutual information with the target variable, and then select the top-k features. Examples include:</p>
+<ul class="simple">
+<li><p>correlation metrics (Pearson, Spearman, distance)</p></li>
+<li><p>chi-squared test</p></li>
+<li><p>ANOVA</p></li>
+<li><p>Fisher’s score</p></li>
+<li><p>mutual information</p></li>
+<li><p>variance threshold.</p></li>
+</ul>
+<div class="section" id="collinearity-correlation-metric">
+<h3>Collinearity (correlation metric)<a class="headerlink" href="#collinearity-correlation-metric" title="Permalink to this heading">#</a></h3>
+<p>[TO DO]</p>
+</div>
+</div>
+<div class="section" id="wrapper-methods">
+<h2>Wrapper methods<a class="headerlink" href="#wrapper-methods" title="Permalink to this heading">#</a></h2>
+<p>Wrapper methods evaluate subsets of features using a specific machine learning model to select the best subset that maximizes model performance. They are usually more computationally expensive. Examples include:</p>
+<ul class="simple">
+<li><p>recursive feature elimination</p></li>
+<li><p>forward selection</p></li>
+<li><p>backward elimination.</p></li>
+</ul>
+<div class="section" id="recursive-feature-elimination">
+<h3>Recursive feature elimination<a class="headerlink" href="#recursive-feature-elimination" title="Permalink to this heading">#</a></h3>
+<p>Recursive feature elimination (RFE) is an iterative algorithm that recursively removes features from the data set and evaluates the performance of the model on the remaining features. By removing the least important feature at each iteration, the algorithm can identify the most important features for the given task. The RFE algorithm works as follows:</p>
+<ol class="arabic simple">
+<li><p>Select the machine learning model that will be used for feature selection. Any model that can attribute a weight or importance to a feature can be used.</p></li>
+<li><p>The model is trained on all features to establish a baseline performance.</p></li>
+<li><p>Features are ranked based on the weight/importance attributed by the model.</p></li>
+<li><p>Remove the least important feature from the data set.</p></li>
+<li><p>Train the model on the reduced set of features.</p></li>
+<li><p>Evaluate the performance of the model on the remaining features to determine whether the performance has improved or worsened compared to the baseline performance.</p></li>
+<li><p>Repeat steps 3-6 until a desired number of features or a desired level of performance is achieved.</p></li>
+</ol>
+<div class="section" id="drawbacks">
+<h4>Drawbacks<a class="headerlink" href="#drawbacks" title="Permalink to this heading">#</a></h4>
+<p>It can be computationally expensive, especially for data sets with a large number of features.</p>
+</div>
+</div>
+<div class="section" id="boruta">
+<h3>Boruta<a class="headerlink" href="#boruta" title="Permalink to this heading">#</a></h3>
+<p>The Boruta method was proposed by Kursa and Rudnicki in 2010 as a way to identify relevant features in data sets with many irrelevant or redundant variables. The Boruta algorithm works by comparing the importance of each variable in the original data set to the importance of a set of shadow variables created by shuffling the values of each feature.</p>
+<p>Then, a Random Forest model is trained on the database with the original and shadow variables, and the importance of each feature is extracted. A threshold is defined as the highest importance recorded among the shadow features. The algorithm then compares the importance of each original variable against the threshold, and if the original variable has a higher importance score, it is considered a “hit” and kept as a relevant feature. The idea is that a feature is useful only if it is capable of doing better than the best randomized feature.</p>
+<p>This process is repeated iteratively until all variables have been either confirmed or rejected. Since each independent experiment can give a binary outcome (“hit” or “no hit”), a series of <em>n</em> trials follows a binomial distribution (see the Figure below).</p>
+<p><img alt="boruta" src="../_images/boruta.png" /></p>
+<p>The Boruta method does not set a hard threshold between a refusal and an acceptance area. Instead, there are 3 areas:</p>
+<ul class="simple">
+<li><p>area of refusal: the features in this area are considered as noise, so they are dropped;</p></li>
+<li><p>area of irresolution: the Boruta method is indecisive about the features that are in this area. It is up to the user whether to select then or not;</p></li>
+<li><p>area of acceptance: the features in this area are considered predictive, so they are kept in the model.</p></li>
+</ul>
+<p>The areas are defined by selecting the two most extreme portions of the distribution called tails of the distribution (usually each tail
+accounts for 0.5 % of the distribution).
+To summarize, the Boruta method is based in two ideas: first, features do not compete among themselves. Instead they compete with a randomized version of them. Second, a series of <em>n</em> trials (comparisons between original and shadow features) follows a binomial distribution.</p>
+<div class="section" id="advantages">
+<h4>Advantages<a class="headerlink" href="#advantages" title="Permalink to this heading">#</a></h4>
+<p>One advantage of the Boruta method is that it is able to handle correlated features, which can cause problems for other feature selection methods. Another advantage is that it is able to identify not only the most important features, but also the interactions between them.</p>
+</div>
+<div class="section" id="id1">
+<h4>Drawbacks<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<p>One potential drawback of the Boruta method is that it can be computationally expensive, especially for large data sets with many variables. Additionally, it requires tuning of several hyperparameters, such as the number of trees in the random forest and the significance level for comparing the importance scores of the original features and their shadow variables.</p>
+</div>
+</div>
+<div class="section" id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://machinelearningmastery.com/rfe-feature-selection-in-python/">Recursive feature elimination article</a></p></li>
+<li><p><a class="reference external" href="https://github.com/scikit-learn-contrib/boruta_py">Boruta Github</a></p></li>
+<li><p><a class="reference external" href="https://www.jstatsoft.org/article/view/v036i11">Boruta Paper</a></p></li>
+<li><p><a class="reference external" href="https://danielhomola.com/feature%20selection/phd/borutapy-an-all-relevant-feature-selection-method/">Boruta Article</a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="embedded-methods">
+<h2>Embedded methods<a class="headerlink" href="#embedded-methods" title="Permalink to this heading">#</a></h2>
+<p>Embedded methods integrate feature selection into the process of building a machine learning model. The feature selection process is part of the model training process, and the algorithm learns which features are most important during model training. Examples include:</p>
+<ul class="simple">
+<li><p>Least Absolute Shrinkage and Selection Operator (LASSO) regression</p></li>
+<li><p>Elastic regression</p></li>
+<li><p>Ridge regression</p></li>
+<li><p>feature importance from Trees based methods.</p></li>
+</ul>
+<div class="section" id="selection-by-model-importance">
+<h3>Selection by model importance<a class="headerlink" href="#selection-by-model-importance" title="Permalink to this heading">#</a></h3>
+<p>A popular algorithm for feature selection is scikit-learn <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectFromModel.html#sklearn.feature_selection.SelectFromModel">SelectFromModel</a>. The SelectFromModel selects a subset of features based on the importance scores of a selected base model that is capable of capturing non-linear relationships and interactions, e.g. a Random Forest. It works by training a model on the entire set of features and then selecting a subset of features based on their importance score as determined by the base model.</p>
+<p>The algorithm first trains the base estimator on the entire feature set and calculates a feature importance score for each feature. The importance scores can be calculated in different ways depending on the type of estimator used, but typically involve measuring how much each feature contributes to the model’s performance.</p>
+<p>The algorithm then selects a subset of features by setting a threshold on the importance scores. Only the features with importance scores greater than or equal to the threshold are selected for the final feature set.</p>
+<div class="section" id="id2">
+<h4>Advantages<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
+<p>The advantage of the SelectFromModel algorithm is that it is model-agnostic and can work with any estimator that can provide a feature importance metric or a coefficient attribute, such as Decision Trees, Random Forests, Logistic Regression, and Support Vector Machines. It can also be used in conjunction with any other pre-processing technique such as scaling, normalization, or encoding.</p>
+</div>
+<div class="section" id="id3">
+<h4>Drawbacks<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
+<p>The weak spot of such an approach is: who determines the threshold, and how? There is a good deal of arbitrariness in it. Additionally, it is important to note that the selected subset of features may not be the optimal set for all types of models or data sets, and that it is still recommended to experiment with different feature selection techniques to find the best set of features for a given problem.</p>
+</div>
+</div>
+</div>
+<div class="section" id="dimensionality-reduction-methods">
+<h2>Dimensionality reduction methods<a class="headerlink" href="#dimensionality-reduction-methods" title="Permalink to this heading">#</a></h2>
+<p>Dimensionality reduction methods transform the original high-dimensional feature space into a lower-dimensional space by combining the original features. Examples include principal component analysis (PCA), linear discriminant analysis (LDA), and t-distributed stochastic neighbor embedding (t-SNE).</p>
+</div>
+<div class="section" id="hybrid-methods">
+<h2>Hybrid methods<a class="headerlink" href="#hybrid-methods" title="Permalink to this heading">#</a></h2>
+<p>Hybrid methods combine multiple feature selection methods to overcome the limitations of each method. Examples include Boruta, which combines filter and wrapper methods, and genetic algorithms, which combine wrapper and embedded methods.</p>
+<p>It is important to note that the choice of feature selection method will depend on the specific problem and the data set being used. It is often necessary to try multiple methods and compare their results to find the best feature subset for a given task.</p>
+<p>In the following sections some methods are explained in greater detail.</p>
+</div>
+</div>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="feature-engineering/similarity-search.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Measure molecular similarity</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="train-test-sets.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Train, validation, and test sets</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-methods">Filter methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#collinearity-correlation-metric">Collinearity (correlation metric)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wrapper-methods">Wrapper methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recursive-feature-elimination">Recursive feature elimination</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks">Drawbacks</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#boruta">Boruta</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Drawbacks</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#embedded-methods">Embedded methods</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-by-model-importance">Selection by model importance</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Advantages</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Drawbacks</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dimensionality-reduction-methods">Dimensionality reduction methods</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hybrid-methods">Hybrid methods</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Aniceto
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023, José Aniceto.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

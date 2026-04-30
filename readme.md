@@ -8,6 +8,7 @@ A Knowledge Base on Machine Learning and Statistics.
 Build the HTML:
 
 ```
+$ .venv\Scripts\activate
 $ .\make html
 ```
 
@@ -16,8 +17,7 @@ The above works on Powershell. One UNIX systems run `make html` and on Windows c
 To serve the page locally you can use Python built-in server.
 
 ```
-$ cd _build/html 
-$ python -m http.server
+$ python -m http.server -d .\_build\html\
 ```
 
 To deploy and serve automatically on changes to the source files:

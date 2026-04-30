@@ -1,0 +1,13 @@
+[project]
+name = "ml-knowledge-base"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "ghp-import>=2.1.0",
+    "myst-parser>=5.0.0",
+    "sphinx>=9.0.4",
+    "sphinx-autobuild>=2025.8.25",
+    "sphinx-book-theme>=1.2.0",
+]

@@ -6,6 +6,7 @@ This section includes topics related to feature engineering, feature selection, 
 dataset-quality
 data-validation
 feature-engineering/index
+correlations
 feature-selection
 train-test-sets
 scaling

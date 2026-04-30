@@ -27,7 +27,7 @@ Filter methods rank features based on statistical measures such as correlation o
 
 ### Collinearity (correlation metric)
 
-\[TO DO\]
+Check [here](correlations.md)
 
 
 ## Wrapper methods

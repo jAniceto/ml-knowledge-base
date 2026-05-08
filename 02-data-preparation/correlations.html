@@ -1,0 +1,844 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Correlations &#8212; Machine Learning Knowledge Base</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '02-data-preparation/correlations';</script>
+    <link rel="shortcut icon" href="../_static/icon64.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Feature selection" href="feature-selection.html" />
+    <link rel="prev" title="Measure molecular similarity" href="feature-engineering/similarity-search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo-horiz-sm.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo-horiz-sm.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../01-intro/index.html">Introduction</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../01-intro/math-basics/index.html">Math Basics</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../01-intro/stats-basics/index.html">Statistics basics</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../01-intro/stats-basics/boxplot.html">Boxplots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01-intro/stats-basics/outliers.html">Outliers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../01-intro/stats-basics/parametric-tests.html">Parametric tests or models</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../01-intro/ml-basics/index.html">Machine Learning Basics</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../01-intro/ml-basics/types-ml.html">Types of ML systems</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../01-intro/ml-basics/ml-workflow.html">Machine Learning workflow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Data preparation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="dataset-quality.html">Quality of a dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data-validation.html">Data validation</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="feature-engineering/index.html">Feature engineering</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="feature-engineering/rdkit.html">RDKit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feature-engineering/maccs.html">MACCS fingerprints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feature-engineering/morgan.html">Morgan ECFP fingerprints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feature-engineering/mordred.html">Mordred</a></li>
+<li class="toctree-l3"><a class="reference internal" href="feature-engineering/similarity-search.html">Measure molecular similarity</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Correlations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature-selection.html">Feature selection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="train-test-sets.html">Train, validation, and test sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="scaling.html">Scaling</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../03-ml-models/index.html">Machine Learning models</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../03-ml-models/linear-models/index.html">Linear models</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../03-ml-models/linear-models/linear-regression.html">Linear regression</a></li>
+
+
+
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../03-ml-models/ml-models.html">ML Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-ml-models/nearest-neighbors.html">k-Nearest Neighbors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-ml-models/decision-tree.html">Decision Tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-ml-models/gradient-boosting.html">Gradient Boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../03-ml-models/hyperparameters-gbm.html">Hyperparameters - Gradient Boosting</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04-model-evaluation/index.html">Model evaluation</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/model-evaluation.html">Model evaluation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/metrics.html">Performance metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/cross-validation.html">Train and cross validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/y-randomization.html">y-Randomization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/partial-dependance-plots.html">Partial dependance plots</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04-model-evaluation/shapley-additice-explanations.html">SHAP (SHapley Additive exPlanations)</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05-sklearn/index.html">Scikit-Learn</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05-sklearn/pipelines.html">Pipelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05-sklearn/saving-models.html">Saving Scikit-learn model for reuse</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Resources</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../06-resources/scientific-papers.html">Scientific articles</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-resources/articles.html">Reading material</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06-resources/python-packages.html">Python ML tools and packages</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/jAniceto/ml-knowledge-base/blob/master/02-data-preparation/correlations.md?plain=1" target="_blank"
+   class="btn btn-sm btn-source-file-button dropdown-item"
+   title="Show source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="btn__text-container">Show source</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jAniceto/ml-knowledge-base/edit/master/02-data-preparation/correlations.md" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/jAniceto/ml-knowledge-base/issues/new?title=Issue%20on%20page%20%2F02-data-preparation/correlations.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/02-data-preparation/correlations.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Correlations</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-correlations">Linear correlations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-correlations">Nonlinear correlations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-transformation">Variable transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-based-correlations">Rank-based correlations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-based-correlations">Distance-based correlations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlations-between-lagged-variables-delays">Correlations between lagged variables (delays)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="tex2jax_ignore mathjax_ignore section" id="correlations">
+<h1>Correlations<a class="headerlink" href="#correlations" title="Permalink to this heading">#</a></h1>
+<p>Analysing the correlation between variables and target responses help identify which inputs carry meaningful information about the target and which are redundant or irrelevant. Measures like the Pearson correlation coefficient reveal linear relationships, while more general tools such as Distance correlation can uncover nonlinear dependencies. By analysing these relationships, you can reduce multicollinearity, improve model interpretability, and focus on variables that genuinely contribute to predictive performance, leading to simpler and more robust models.</p>
+<div class="section" id="linear-correlations">
+<h2>Linear correlations<a class="headerlink" href="#linear-correlations" title="Permalink to this heading">#</a></h2>
+<p>The Pearson correlation coefficient (often denoted <span class="math notranslate nohighlight">\(r\)</span>) is a statistical measure that quantifies the strength and direction of a linear relationship between two continuous variables.</p>
+<p>The coefficient is mathematically defined as the covariance of two variables divided by the product of their standard deviations:</p>
+<div class="math notranslate nohighlight">
+\[
+r =  \frac{ \sum_{i=1}^{n}(x_i-\bar{x})(y_i-\bar{y}) }{\sqrt{\sum_{i=1}^{n}(x_i-\bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i-\bar{y})^2}}
+\]</div>
+<p>Values close to <span class="math notranslate nohighlight">\(+1\)</span> indicate a strong positive linear relationship (both variables increase together), while values near <span class="math notranslate nohighlight">\(–1\)</span> indicate a strong negative relationship. A value around <span class="math notranslate nohighlight">\(0\)</span> suggests no linear correlation.</p>
+<p>The Pearson correlation coefficient assumes that both variables are continuous, approximately normally distributed, and exhibit a linear relationship with homoscedasticity (equal variance). It is sensitive to outliers and may misrepresent non-linear relationships. In such cases, non-parametric alternatives like Spearman rank correlation coefficient or Kendall’s tau coefficient are preferred.</p>
+</div>
+<div class="section" id="nonlinear-correlations">
+<h2>Nonlinear correlations<a class="headerlink" href="#nonlinear-correlations" title="Permalink to this heading">#</a></h2>
+<p>The standard Pearson correlation coefficient won’t help if the correlation between variables in nonlinear. A perfect quadratic relationship (like <span class="math notranslate nohighlight">\(y=x^2\)</span>) can even give a Pearson correlation near zero. To detect nonlinear correlations, other methods must be used, such as:</p>
+<ul class="simple">
+<li><p>Variable transformation;</p></li>
+<li><p>Rank-based correlations;</p></li>
+<li><p>Distance-based correlations.</p></li>
+</ul>
+<div class="section" id="variable-transformation">
+<h3>Variable transformation<a class="headerlink" href="#variable-transformation" title="Permalink to this heading">#</a></h3>
+<p>If you suspect a specific nonlinear form (like quadratic, <span class="math notranslate nohighlight">\(y=x^2\)</span>), transform your data and then apply Pearson correlation. Computing the Pearson correlation between <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x\)</span> will show low values since the correlation is not linear but computing the Pearson correlation between <span class="math notranslate nohighlight">\(y\)</span> and <span class="math notranslate nohighlight">\(x^2\)</span> will show a high Pearson correlation.</p>
+</div>
+<div class="section" id="rank-based-correlations">
+<h3>Rank-based correlations<a class="headerlink" href="#rank-based-correlations" title="Permalink to this heading">#</a></h3>
+<p>The Spearman’s rank correlation coefficient detects monotonic relationships (increasing or decreasing, not necessarily linear) between variables. It works for many nonlinear cases, but fails for non-monotonic ones (like pure quadratic <span class="math notranslate nohighlight">\(x^2\)</span>).</p>
+<p>Spearman’s coefficient quantifies how well the relationship between two variables can be described by a monotonic function (one that never reverses direction). Each variable’s values are first converted into ranks, differences between paired ranks are squared and summed, and the result is scaled by sample size.</p>
+<p>Values of <span class="math notranslate nohighlight">\(+1\)</span> or <span class="math notranslate nohighlight">\(-1\)</span> indicate perfect monotonic association (ranks increase or decrease together exactly) while <span class="math notranslate nohighlight">\(0\)</span> indicates no monotonic relationship. Because it relies on ranks rather than raw scores, Spearman’s coefficient is robust to outliers and applicable to ordinal or skewed data.</p>
+</div>
+<div class="section" id="distance-based-correlations">
+<h3>Distance-based correlations<a class="headerlink" href="#distance-based-correlations" title="Permalink to this heading">#</a></h3>
+<p>Distance correlation is a statistical measure of dependence between random variables or vectors. It extends classical correlation by detecting both linear and nonlinear associations between variables. Unlike Pearson’s correlation, it equals zero only if the variables are statistically independent.</p>
+<p>To compute distance correlation we can use a dedicated library like <a class="reference external" href="https://github.com/vnmabus/dcor"><code class="docutils literal notranslate"><span class="pre">dcor</span></code></a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">dcor</span>
+
+<span class="c1"># Example data (nonlinear relationship)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># quadratic relationship</span>
+
+<span class="c1"># Compute distance correlation</span>
+<span class="n">dcor_value</span> <span class="o">=</span> <span class="n">dcor</span><span class="o">.</span><span class="n">distance_correlation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">dcor_value</span></code> of <span class="math notranslate nohighlight">\(0\)</span> means variables are independent (no correlation). A <code class="docutils literal notranslate"><span class="pre">dcor_value</span></code> of <span class="math notranslate nohighlight">\(&gt; 0\)</span> means some dependence is present (linear or nonlinear). A <code class="docutils literal notranslate"><span class="pre">dcor_value</span></code> close to <span class="math notranslate nohighlight">\(1\)</span> means a strong relationship exists.</p>
+<p>Alternative calculations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dcor</span><span class="o">.</span><span class="n">distance_covariance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">dcor</span><span class="o">.</span><span class="n">distance_correlation_sqr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can test if the dependence is statistically significant:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">dcor</span><span class="o">.</span><span class="n">independence</span><span class="o">.</span><span class="n">distance_covariance_test</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A small <span class="math notranslate nohighlight">\(p\)</span>-value (e.g., <span class="math notranslate nohighlight">\(&lt; 0.05\)</span>) means you should reject independence.</p>
+</div>
+</div>
+<div class="section" id="correlations-between-lagged-variables-delays">
+<h2>Correlations between lagged variables (delays)<a class="headerlink" href="#correlations-between-lagged-variables-delays" title="Permalink to this heading">#</a></h2>
+<p>When variables are affected by a time delay, standard correlation (computed at the same time index) can completely miss the relationship. Instead, you need to evaluate correlation as a function of lag.</p>
+<p>A cross-correlation function will measure how well one signal matches another when shifted in time. The idea is:</p>
+<ol class="arabic simple">
+<li><p>We shift <span class="math notranslate nohighlight">\(x\)</span> by different lags <span class="math notranslate nohighlight">\(k\)</span>;</p></li>
+<li><p>We compute correlation between <span class="math notranslate nohighlight">\(x(t−k)\)</span> and <span class="math notranslate nohighlight">\(y(t)\)</span>.</p></li>
+</ol>
+<p>The lag with the highest correlation tells you if a relationship exists and how long the delay is.</p>
+<p>Instead of computing only <span class="math notranslate nohighlight">\(corr(x_t, y_t)\)</span>, we compute <span class="math notranslate nohighlight">\(corr(x_{t-k}, y_t)\)</span> for many values of <span class="math notranslate nohighlight">\(k\)</span>. If the higher correlation shows at, for instance, <span class="math notranslate nohighlight">\(k=5\)</span> then changes in <span class="math notranslate nohighlight">\(x\)</span> affect <span class="math notranslate nohighlight">\(y\)</span> only 5 samples later. Knowing the interval between samples (for instance, 1 min) we know the time delay (in this case: 5 samples <span class="math notranslate nohighlight">\(\times\)</span> 1 min <span class="math notranslate nohighlight">\(=\)</span> 5 min delay).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Example data (y depends on x with delay 5)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># y depends on x with delay 5</span>
+
+<span class="c1"># Compute cross-correlation</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">y</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span>
+<span class="n">lags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># Normalize</span>
+<span class="n">corr</span> <span class="o">=</span> <span class="n">corr</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="c1"># Find best lag</span>
+<span class="n">best_lag</span> <span class="o">=</span> <span class="n">lags</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">corr</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best lag:&quot;</span><span class="p">,</span> <span class="n">best_lag</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lags</span><span class="p">,</span> <span class="n">corr</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Lag&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Correlation&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>An here is an example <code class="docutils literal notranslate"><span class="pre">sklearn</span></code> pipeline for automatic lag selection using regularization. It:</p>
+<ul class="simple">
+<li><p>generates lagged features;</p></li>
+<li><p>handles missing values;</p></li>
+<li><p>scales data;</p></li>
+<li><p>uses Lasso regression to automatically select the most relevant lags;</p></li>
+<li><p>works with time-aware validation.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LassoCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">TimeSeriesSplit</span>
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># Custom lag feature generator</span>
+<span class="c1"># ---------------------------</span>
+<span class="k">class</span> <span class="nc">LagFeatureTransformer</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lags</span><span class="p">):</span>
+       <span class="bp">self</span><span class="o">.</span><span class="n">lags</span> <span class="o">=</span> <span class="n">lags</span>
+
+   <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+       <span class="k">return</span> <span class="bp">self</span>
+
+   <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+       <span class="n">X_lagged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+       <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+           <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lags</span><span class="p">:</span>
+               <span class="n">X_lagged</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">_lag_</span><span class="si">{</span><span class="n">lag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span>
+
+       <span class="k">return</span> <span class="n">X_lagged</span>
+
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># Example data</span>
+<span class="c1"># ---------------------------</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+   <span class="s2">&quot;x1&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
+   <span class="s2">&quot;x2&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1"># target depends on delayed x1</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># Define lag range</span>
+<span class="c1"># ---------------------------</span>
+<span class="n">lags</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>  <span class="c1"># try lags 1 to 10</span>
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># Pipeline</span>
+<span class="c1"># ---------------------------</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span>
+   <span class="p">(</span><span class="s2">&quot;lags&quot;</span><span class="p">,</span> <span class="n">LagFeatureTransformer</span><span class="p">(</span><span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">)),</span>
+   <span class="p">(</span><span class="s2">&quot;dropna&quot;</span><span class="p">,</span> <span class="n">FunctionTransformer</span><span class="p">(</span><span class="k">lambda</span> <span class="n">X</span><span class="p">:</span> <span class="n">X</span><span class="o">.</span><span class="n">dropna</span><span class="p">(),</span> <span class="n">validate</span><span class="o">=</span><span class="kc">False</span><span class="p">)),</span>
+   <span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+   <span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">,</span> <span class="n">LassoCV</span><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="n">TimeSeriesSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">)))</span>
+<span class="p">])</span>
+
+<span class="c1"># Align target after lagging</span>
+<span class="n">X_lagged</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s2">&quot;lags&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">valid_idx</span> <span class="o">=</span> <span class="n">X_lagged</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span>
+
+<span class="n">X_final</span> <span class="o">=</span> <span class="n">X_lagged</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">valid_idx</span><span class="p">]</span>
+<span class="n">y_final</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">valid_idx</span><span class="p">]</span>
+
+<span class="c1"># Fit model</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+   <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_final</span><span class="p">),</span>
+   <span class="n">y_final</span>
+<span class="p">)</span>
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># Inspect selected lags</span>
+<span class="c1"># ---------------------------</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">X_final</span><span class="o">.</span><span class="n">columns</span>
+<span class="n">coeffs</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">named_steps</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">coef_</span>
+
+<span class="n">selected</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">coef</span><span class="p">)</span>
+   <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">coef</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">coeffs</span><span class="p">)</span>
+   <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">coef</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">1e-6</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Selected lagged features:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">coef</span> <span class="ow">in</span> <span class="n">selected</span><span class="p">:</span>
+   <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">coef</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Same example but using but using a nonlinear model (tree-based), which can capture complex delayed relationships without needing explicit transformations. We use Gradient Boosting via <code class="docutils literal notranslate"><span class="pre">GradientBoostingRegressor</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.base</span> <span class="kn">import</span> <span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">TimeSeriesSplit</span>
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># Lag feature transformer</span>
+<span class="c1"># ---------------------------</span>
+<span class="k">class</span> <span class="nc">LagFeatureTransformer</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">,</span> <span class="n">TransformerMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lags</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lags</span> <span class="o">=</span> <span class="n">lags</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="n">X_lagged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">lag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">lags</span><span class="p">:</span>
+                <span class="n">X_lagged</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">_lag_</span><span class="si">{</span><span class="n">lag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">X_lagged</span>
+
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># Example data</span>
+<span class="c1"># ---------------------------</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">300</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;x1&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
+    <span class="s2">&quot;x2&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1"># Nonlinear delayed relationship</span>
+<span class="n">df</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;x1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> 
+           <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;x2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span> <span class="o">+</span>
+           <span class="mf">0.1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="s2">&quot;x2&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># Lag setup</span>
+<span class="c1"># ---------------------------</span>
+<span class="n">lags</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+
+<span class="n">lagger</span> <span class="o">=</span> <span class="n">LagFeatureTransformer</span><span class="p">(</span><span class="n">lags</span><span class="o">=</span><span class="n">lags</span><span class="p">)</span>
+
+<span class="c1"># Create lagged data</span>
+<span class="n">X_lagged</span> <span class="o">=</span> <span class="n">lagger</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+<span class="n">valid_idx</span> <span class="o">=</span> <span class="n">X_lagged</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">index</span>
+
+<span class="n">X_final</span> <span class="o">=</span> <span class="n">X_lagged</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">valid_idx</span><span class="p">]</span>
+<span class="n">y_final</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">valid_idx</span><span class="p">]</span>
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># Model (nonlinear)</span>
+<span class="c1"># ---------------------------</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span>
+    <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># Time-series CV</span>
+<span class="c1"># ---------------------------</span>
+<span class="n">tscv</span> <span class="o">=</span> <span class="n">TimeSeriesSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">train_idx</span><span class="p">,</span> <span class="n">test_idx</span> <span class="ow">in</span> <span class="n">tscv</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">X_final</span><span class="p">):</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X_final</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">],</span> <span class="n">X_final</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">]</span>
+    <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y_final</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_idx</span><span class="p">],</span> <span class="n">y_final</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_idx</span><span class="p">]</span>
+    
+    <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># ---------------------------</span>
+<span class="c1"># Feature importance = lag selection</span>
+<span class="c1"># ---------------------------</span>
+<span class="n">importances</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">feature_importances_</span>
+<span class="n">feature_names</span> <span class="o">=</span> <span class="n">X_final</span><span class="o">.</span><span class="n">columns</span>
+
+<span class="n">selected</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+    <span class="p">[(</span><span class="n">name</span><span class="p">,</span> <span class="n">imp</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">imp</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">feature_names</span><span class="p">,</span> <span class="n">importances</span><span class="p">)],</span>
+    <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+    <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Most important lagged features:&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">imp</span> <span class="ow">in</span> <span class="n">selected</span><span class="p">[:</span><span class="mi">10</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">imp</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="feature-engineering/similarity-search.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Measure molecular similarity</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="feature-selection.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Feature selection</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-correlations">Linear correlations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#nonlinear-correlations">Nonlinear correlations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variable-transformation">Variable transformation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rank-based-correlations">Rank-based correlations</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#distance-based-correlations">Distance-based correlations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#correlations-between-lagged-variables-delays">Correlations between lagged variables (delays)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By José Aniceto
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2023, José Aniceto.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

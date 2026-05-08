@@ -14,14 +14,25 @@ No, scaling is not necessary for Random Forests and Decision Trees. The nature o
 Note that, for classification tasks, the output of the Random Forest is the class selected by most trees. For regression tasks, the mean or average prediction of the individual trees is returned. Therefore, data normalization won't affect the output for Random Forest classifiers while it will affect the output for Random Forest regressors.
 
 
-## Normalization
+## Min-max scaling
 
-Min-max scaling (many people call this normalization) is quite simple: values are shifted and rescaled so that they end up ranging from 0 to 1.
+Min-max scaling (also called normalization) is quite simple: values are shifted and rescaled so that they end up in the range $[0, 1]$ (or $[-1, 1]$).
 
+$$
+x_\text{scaled} = \frac{x - x_\text{min}}{x_\text{max} - x_\text{min}}
+$$
 
-## Standardization
+where $x$ is the original value, $x_\text{min}$ is the minimum value of the feature, $x_\text{max}$ is the maximum value of the feature, and $x_\text{scaled}$ is the scaled value.
 
-Standardization first it subtracts the mean value (so standardized values always have a zero mean), and then it divides by the standard deviation so that the resulting distribution has unit variance.
+Advantages:
+- Ensures that all features have same scale.
+- It is simple and easy to interpret.
+
+Disadvantages:
+- It is sensitive to outliers and the extreme values can distort scaling may cause makes most data points cluster near 0 or 1.
+- Fixed range limits flexibility for datasets with changing scales.
+
+Typical workflow using `scikit-learn`:
 
 ```python
 # Create the scaler object with a range of 0-1
@@ -34,6 +45,46 @@ scaler.fit(x_train)
 x_train = scaler.transform(x_train)
 x_test = scaler.transform(x_test)
 ```
+
+
+## Standardization
+
+Standardization follows Standard Normal Distribution. It transforms data so that the mean becomes 0 and the standard deviation becomes 1. This centers the data around zero and standardizes variability. It's ideal for algorithms like SVM, logistic regression or neural networks that assume data is normally distributed.
+
+$$
+x_\text{scaled} = \frac{x - \mu}{\sigma}
+$$
+
+where $\mu$ is the mean value of the feature and $\sigma$ is the standard deviation.
+
+Advantages:
+- Handles features with different units effectively.
+- Reduces impact of outliers without completely removing them.
+
+Disadvantages:
+- It is sensitive to outliers and extreme values can skew mean and standard deviation which leads to poor scaling.
+- It is not ideal for non-normal distributions.
+
+
+## Robust scaling
+
+Robust scaling reduces the impact of outliers by scaling data using median and interquartile range (IQR) which makes it fit to extreme values. It is useful when data contains many outliers and we need to maintain relative distances between non-outlier data points or when working with algorithms which are sensitive to extreme values.
+
+$$
+x_\text{scaled} = \frac{x - \text{Median}(x)}{Q_3 - Q_1}
+$$
+
+where $\text{Median}(x)$ is the $Q_2$ ​or the median quartile (50th percentile), $Q_1$​ is the first quartile (25th percentile), and $Q_3$ is the third quartile (75th percentile).
+
+Advantages:
+- Resistant to outliers.
+- Maintains the structure of data and it is better than MinMaxScaler in the presence of extreme values.
+
+Disadvantages:
+- May not perform well when data is highly skewed.
+- Less interpretable compared to MinMaxScaler.
+
+
 
 ## Scaling data before or after train/test split
 
